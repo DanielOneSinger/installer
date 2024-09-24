@@ -53,6 +53,14 @@ chmod +x init.config
 # Start Docker containers and build
 docker compose up --build -d
 
+echo "开始重启worker容器，确保可以加入topic"
+for i in {1..3}
+do
+    echo "执行第 $i 次重启"
+    docker restart worker    
+    sleep 5
+done
+
 # Output completion message
 echo "Your worker node have been started. To check logs, run:"
 echo "docker logs -f worker"
